@@ -39,6 +39,9 @@
             "https://www.drupal.org/node/2718229"
         ],
         "merge-plugin": {
+            "include": [
+                "modules/dc/composer.json"
+            ],
             "recurse": true,
             "replace": false,
             "merge-extra": false

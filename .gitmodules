@@ -1,0 +1,3 @@
+[submodule "modules/dc"]
+	path = modules/dc
+	url = git@gitlab.com:neibrs/dc.git
