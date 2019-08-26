@@ -14,13 +14,12 @@ use Drupal\Core\Database\Database;
 use Drupal\Core\File\Exception\FileException;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\StreamWrapper\PublicStream;
+use Drupal\Core\Test\PhpUnitTestRunner;
 use Drupal\Core\Test\TestDatabase;
 use Drupal\Core\Test\TestRunnerKernel;
 use Drupal\simpletest\Form\SimpletestResultsForm;
-use Drupal\simpletest\TestBase;
-use Drupal\simpletest\TestDiscovery;
+use Drupal\Core\Test\TestDiscovery;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Runner\Version;
 use Symfony\Component\HttpFoundation\Request;
 
 // Define some colors for display.
@@ -65,6 +64,8 @@ if ($args['list']) {
   echo "\nAvailable test groups & classes\n";
   echo "-------------------------------\n\n";
   try {
+    // @todo Use \Drupal\Core\Test\TestDiscovery when we no longer need BC for
+    //   hook_simpletest_alter().
     $groups = \Drupal::service('test_discovery')->getTestClasses($args['module']);
   }
   catch (Exception $e) {
@@ -95,6 +96,8 @@ if ($args['list-files'] || $args['list-files-json']) {
   // List all files which could be run as tests.
   $test_discovery = NULL;
   try {
+    // @todo Use \Drupal\Core\Test\TestDiscovery when we no longer need BC for
+    //   hook_simpletest_alter().
     $test_discovery = \Drupal::service('test_discovery');
   }
   catch (Exception $e) {
@@ -138,14 +141,6 @@ if ($args['clean']) {
     echo " - " . $text . "\n";
   }
   exit(SIMPLETEST_SCRIPT_EXIT_SUCCESS);
-}
-
-// Ensure we have the correct PHPUnit version for the version of PHP.
-if (class_exists('\PHPUnit_Runner_Version')) {
-  $phpunit_version = \PHPUnit_Runner_Version::id();
-}
-else {
-  $phpunit_version = Version::id();
 }
 
 $test_list = simpletest_script_get_test_list();
@@ -651,8 +646,7 @@ function simpletest_script_setup_database($new = FALSE) {
     exit(SIMPLETEST_SCRIPT_EXIT_FAILURE);
   }
   if ($new && $sqlite) {
-    require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'simpletest') . '/simpletest.install';
-    foreach (simpletest_schema() as $name => $table_spec) {
+    foreach (TestDatabase::testingSchema() as $name => $table_spec) {
       try {
         $table_exists = $schema->tableExists($name);
         if (empty($args['keep-results-table']) && $table_exists) {
@@ -748,14 +742,14 @@ function simpletest_script_execute_batch($test_classes) {
           // @see https://www.drupal.org/node/2780087
           $total_status = max(SIMPLETEST_SCRIPT_EXIT_FAILURE, $total_status);
           // Insert a fail for xml results.
-          simpletest_insert_assert($child['test_id'], $child['class'], FALSE, $message, 'run-tests.sh check');
+          TestDatabase::insertAssert($child['test_id'], $child['class'], FALSE, $message, 'run-tests.sh check');
           // Ensure that an error line is displayed for the class.
           simpletest_script_reporter_display_summary(
             $child['class'],
             ['#pass' => 0, '#fail' => 1, '#exception' => 0, '#debug' => 0]
           );
           if ($args['die-on-fail']) {
-            list($db_prefix) = simpletest_last_test_get($child['test_id']);
+            list($db_prefix) = TestDatabase::lastTestGet($child['test_id']);
             $test_db = new TestDatabase($db_prefix);
             $test_directory = $test_db->getTestSitePath();
             echo 'Simpletest database and files kept and test exited immediately on fail so should be reproducible if you change settings.php to use the database prefix ' . $db_prefix . ' and config directories in ' . $test_directory . "\n";
@@ -786,12 +780,11 @@ function simpletest_script_run_phpunit($test_id, $class) {
     set_time_limit($reflection->getStaticPropertyValue('runLimit'));
   }
 
-  $results = simpletest_run_phpunit_tests($test_id, [$class], $status);
+  $runner = PhpUnitTestRunner::create(\Drupal::getContainer());
+  $results = $runner->runTests($test_id, [$class], $status);
   simpletest_process_phpunit_results($results);
 
-  // Map phpunit results to a data structure we can pass to
-  // _simpletest_format_summary_line.
-  $summaries = simpletest_summarize_phpunit_result($results);
+  $summaries = $runner->summarizeResults($results);
   foreach ($summaries as $class => $summary) {
     simpletest_script_reporter_display_summary($class, $summary);
   }
@@ -906,7 +899,7 @@ function simpletest_script_cleanup($test_id, $test_class, $exitcode) {
   }
   // Retrieve the last database prefix used for testing.
   try {
-    list($db_prefix) = simpletest_last_test_get($test_id);
+    list($db_prefix) = TestDatabase::lastTestGet($test_id);
   }
   catch (Exception $e) {
     echo (string) $e;
@@ -927,7 +920,7 @@ function simpletest_script_cleanup($test_id, $test_class, $exitcode) {
 
   // Read the log file in case any fatal errors caused the test to crash.
   try {
-    simpletest_log_read($test_id, $db_prefix, $test_class);
+    (new TestDatabase($db_prefix))->logRead($test_id, $last_test_class);
   }
   catch (Exception $e) {
     echo (string) $e;
@@ -995,6 +988,8 @@ function simpletest_script_cleanup($test_id, $test_class, $exitcode) {
 function simpletest_script_get_test_list() {
   global $args;
 
+  // @todo Use \Drupal\Core\Test\TestDiscovery when we no longer need BC for
+  //   hook_simpletest_alter().
   /** $test_discovery \Drupal\simpletest\TestDiscovery */
   $test_discovery = \Drupal::service('test_discovery');
   $types_processed = empty($args['types']);

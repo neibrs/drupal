@@ -151,6 +151,13 @@ class MigrateFieldInstanceTest extends MigrateDrupal7TestBase {
     $description_field = FieldConfig::load('taxonomy_term.test_vocabulary.description_field');
     $this->assertNull($description_field);
 
+    $boolean_field = FieldConfig::load('node.test_content_type.field_boolean');
+    $expected_settings = [
+      'on_label' => '1',
+      'off_label' => 'Off',
+    ];
+    $this->assertSame($expected_settings, $boolean_field->get('settings'));
+
     // Test the translation settings for taxonomy fields.
     $this->assertEntity('node.article.field_vocab_fixed', 'vocab_fixed', 'entity_reference', FALSE, FALSE);
     $this->assertEntity('node.article.field_vocab_localize', 'vocab_localize', 'entity_reference', FALSE, FALSE);
@@ -196,10 +203,9 @@ class MigrateFieldInstanceTest extends MigrateDrupal7TestBase {
     // For each text field instances that were skipped, there should be a log
     // message with the required steps to fix this.
     $migration = $this->getMigration('d7_field_instance');
-    $messages = $migration->getIdMap()->getMessageIterator()->fetchAll();
     $errors = array_map(function ($message) {
       return $message->message;
-    }, $messages);
+    }, iterator_to_array($migration->getIdMap()->getMessages()));
     $this->assertCount(8, $errors);
     sort($errors);
     $message = 'Can\'t migrate source field field_text_long_plain_filtered configured with both plain text and filtered text processing. See https://www.drupal.org/docs/8/upgrade/known-issues-when-upgrading-from-drupal-6-or-7-to-drupal-8#plain-text';
