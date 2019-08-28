@@ -6,7 +6,8 @@
     "require": {
         "composer/installers": "^1.0.24",
         "wikimedia/composer-merge-plugin": "^1.4",
-        "drupal/core": "self.version"
+        "drupal/core": "self.version",
+        "npm-asset/highlightjs": "^9.12"
     },
     "require-dev": {
         "behat/mink": "1.7.x-dev",
@@ -22,7 +23,8 @@
         "symfony/css-selector": "^3.4.0",
         "symfony/phpunit-bridge": "^3.4.3",
         "symfony/debug": "^3.4.0",
-        "justinrainbow/json-schema": "^5.2"
+        "justinrainbow/json-schema": "^5.2",
+        "oomphinc/composer-installers-extender": "^1.1"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -53,7 +55,19 @@
             "themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/contrib/{$name}": ["type:drupal-drush"],
             "modules/custom/{$name}": ["type:drupal-custom-module"],
-            "themes/custom/{$name}": ["type:drupal-custom-theme"]
+            "themes/custom/{$name}": ["type:drupal-custom-theme"],
+            "libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ]
+        },
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
+        "drupal-libraries": {
+            "library-directory": "libraries"
         }
     },
     "autoload": {
@@ -84,6 +98,10 @@
         {
             "type": "path",
             "url": "core"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         }
     ]
 }
