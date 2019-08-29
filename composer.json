@@ -7,7 +7,10 @@
         "composer/installers": "^1.0.24",
         "wikimedia/composer-merge-plugin": "^1.4",
         "drupal/core": "self.version",
-        "npm-asset/highlightjs": "^9.12"
+        "npm-asset/highlightjs": "^9.12",
+        "oomphinc/composer-installers-extender": "^1.1",
+        "bower-asset/jquery-simple-color": "^1.2",
+        "bower-asset/spectrum": "^1.8"
     },
     "require-dev": {
         "behat/mink": "1.7.x-dev",
@@ -23,8 +26,7 @@
         "symfony/css-selector": "^3.4.0",
         "symfony/phpunit-bridge": "^3.4.3",
         "symfony/debug": "^3.4.0",
-        "justinrainbow/json-schema": "^5.2",
-        "oomphinc/composer-installers-extender": "^1.1"
+        "justinrainbow/json-schema": "^5.2"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

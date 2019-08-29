@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee417368537771198fc85e26746ba582",
+    "content-hash": "7974a65549bf299f339851c4e4951bdf",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -133,6 +133,60 @@
                 "stack"
             ],
             "time": "2017-12-20T14:37:45+00:00"
+        },
+        {
+            "name": "bower-asset/jquery",
+            "version": "3.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jquery/jquery-dist.git",
+                "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/15bc73803f76bc53b654b9fdbbbc096f56d7c03d",
+                "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/jquery-simple-color",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:recurser/jquery-simple-color.git",
+                "reference": "ebe0b2c0db639584e81499bd29d6619abb9a2599"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/recurser/jquery-simple-color/zipball/ebe0b2c0db639584e81499bd29d6619abb9a2599",
+                "reference": "ebe0b2c0db639584e81499bd29d6619abb9a2599"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/spectrum",
+            "version": "1.8.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:bgrins/spectrum.git",
+                "reference": "98454b55521cfb495f628db28af01100c029ef76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bgrins/spectrum/zipball/98454b55521cfb495f628db28af01100c029ef76",
+                "reference": "98454b55521cfb495f628db28af01100c029ef76"
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.7.2"
+            },
+            "type": "bower-asset"
         },
         {
             "name": "brumann/polyfill-unserialize",
@@ -6755,6 +6809,54 @@
             ]
         },
         {
+            "name": "oomphinc/composer-installers-extender",
+            "version": "v1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oomphinc/composer-installers-extender.git",
+                "reference": "ca1c4b16b0905c81d1e77e608f36a2eff1a56f56"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oomphinc/composer-installers-extender/zipball/ca1c4b16b0905c81d1e77e608f36a2eff1a56f56",
+                "reference": "ca1c4b16b0905c81d1e77e608f36a2eff1a56f56",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "composer/installers": "^1.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "OomphInc\\ComposerInstallersExtender\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "OomphInc\\ComposerInstallersExtender\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stephen Beemsterboer",
+                    "email": "stephen@oomphinc.com",
+                    "homepage": "https://github.com/balbuf"
+                }
+            ],
+            "description": "Extend the composer/installers plugin to accept any arbitrary package type.",
+            "homepage": "http://www.oomphinc.com/",
+            "time": "2017-03-31T16:57:39+00:00"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v9.99.99",
             "source": {
@@ -11098,54 +11200,6 @@
                 "object graph"
             ],
             "time": "2019-08-09T12:45:53+00:00"
-        },
-        {
-            "name": "oomphinc/composer-installers-extender",
-            "version": "v1.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/oomphinc/composer-installers-extender.git",
-                "reference": "ca1c4b16b0905c81d1e77e608f36a2eff1a56f56"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/oomphinc/composer-installers-extender/zipball/ca1c4b16b0905c81d1e77e608f36a2eff1a56f56",
-                "reference": "ca1c4b16b0905c81d1e77e608f36a2eff1a56f56",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "composer-plugin-api": "^1.0",
-                "composer/installers": "^1.0"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "OomphInc\\ComposerInstallersExtender\\Plugin"
-            },
-            "autoload": {
-                "psr-4": {
-                    "OomphInc\\ComposerInstallersExtender\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Stephen Beemsterboer",
-                    "email": "stephen@oomphinc.com",
-                    "homepage": "https://github.com/balbuf"
-                }
-            ],
-            "description": "Extend the composer/installers plugin to accept any arbitrary package type.",
-            "homepage": "http://www.oomphinc.com/",
-            "time": "2017-03-31T16:57:39+00:00"
         },
         {
             "name": "phar-io/manifest",
