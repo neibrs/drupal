@@ -17,7 +17,13 @@
         "drupal/memcache": "^2.1",
         "drupal/drush_language": "^1.0@RC",
         "drupal/config_update_ui": "^1.7",
-        "drupal/adminimal_admin_toolbar": "^1.11"
+        "drupal/adminimal_admin_toolbar": "^1.11",
+        "drupal/drupal-library-installer-plugin": "^0.3.0",
+        "oomphinc/composer-installers-extender": "^1.1",
+        "wikimedia/composer-merge-plugin": "^1.4",
+        "webflo/drupal-finder": "^1.2",
+        "webmozart/path-util": "^2.3",
+        "cweagans/composer-patches": "^1.6"
     },
     "require-dev": {
         "behat/mink": "^1.8",
@@ -56,17 +62,45 @@
         "merge-plugin": {
             "recurse": true,
             "replace": false,
-            "merge-extra": false
+            "merge-extra": false,
+            "include": [
+                "modules/ds/composer.json"
+            ],
+            "ignore-duplicates": false,
+            "merge-dev": true,
+            "merge-extra-deep": false,
+            "merge-scripts": false
         },
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
         "installer-paths": {
             "core": ["type:drupal-core"],
-            "libraries/{$name}": ["type:drupal-library"],
+            "libraries/slick": ["npm-asset/slick-carousel"],
+            "libraries/ace": ["npm-asset/ace-builds"],
+            "libraries/masonry": ["npm-asset/masonry-layout"],
+            "libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
             "modules/contrib/{$name}": ["type:drupal-module"],
             "profiles/contrib/{$name}": ["type:drupal-profile"],
             "themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
             "modules/custom/{$name}": ["type:drupal-custom-module"],
             "themes/custom/{$name}": ["type:drupal-custom-theme"]
+        },
+        "enable-patching": true,
+        "composer-exit-on-patch-failure": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
+        "patches": {
+            "drupal/drupal": {
+                "LayoutBuilderEntityViewDisplay class does not correspond to an entity type": "https://www.drupal.org/files/issues/2020-05-15/3127026-originalclass-12.patch"
+            }
         },
         "drupal-core-project-message": {
             "post-install-cmd-message": [
@@ -109,16 +143,20 @@
             "url": "https://packages.drupal.org/8"
         },
         {
-            "type": "path",
-            "url": "core"
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         },
         {
-            "type": "path",
-            "url": "composer/Plugin/ProjectMessage"
-        },
-        {
-            "type": "path",
-            "url": "composer/Plugin/VendorHardening"
+            "type": "package",
+            "package": {
+                "name": "antennaio/jquery-bar-rating",
+                "version": "1.2.2",
+                "type": "drupal-library",
+                "dist": {
+                    "type": "zip",
+                    "url": "https://github.com/antennaio/jquery-bar-rating/archive/v1.2.2.zip"
+                }
+            }
         }
     ]
 }
