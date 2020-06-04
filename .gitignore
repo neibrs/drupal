@@ -1,2 +1,7 @@
 vendor
 .idea
+modules/contrib
+themes/contrib
+modules/ds
+modules/dsi
+modules/eabax
