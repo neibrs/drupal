@@ -23,7 +23,8 @@
         "wikimedia/composer-merge-plugin": "^1.4",
         "webflo/drupal-finder": "^1.2",
         "webmozart/path-util": "^2.3",
-        "cweagans/composer-patches": "^1.6"
+        "cweagans/composer-patches": "^1.6",
+        "drupal/commerce": "^2.19"
     },
     "require-dev": {
         "behat/mink": "^1.8",

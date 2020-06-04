@@ -5,3 +5,8 @@ themes/contrib
 modules/ds
 modules/dsi
 modules/eabax
+
+modules/claro/
+sites/default/files/
+sites/default/services.yml
+sites/default/settings.php
