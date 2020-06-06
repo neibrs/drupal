@@ -5,7 +5,7 @@ themes/contrib
 modules/ds
 modules/dsi
 modules/eabax
-
+dsi
 modules/claro/
 sites/default/files/
 sites/default/services.yml
