@@ -24,7 +24,12 @@
         "webflo/drupal-finder": "^1.2",
         "webmozart/path-util": "^2.3",
         "cweagans/composer-patches": "^1.6",
-        "drupal/commerce": "^2.19"
+        "drupal/commerce": "^2.19",
+        "drupal/block_style_plugins": "^1.4",
+        "drupal/geolocation": "^3.2",
+        "drupal/geofield": "^1.15",
+        "drupal/geocoder": "^3.7",
+        "drupal/field_group": "^3.1"
     },
     "require-dev": {
         "behat/mink": "^1.8",
