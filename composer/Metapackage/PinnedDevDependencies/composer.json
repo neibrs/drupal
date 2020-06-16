@@ -35,7 +35,7 @@
         "phpunit/php-text-template": "1.2.1",
         "phpunit/php-timer": "2.1.2",
         "phpunit/php-token-stream": "3.1.1",
-        "phpunit/phpunit": "8.5.5",
+        "phpunit/phpunit": "8.5.6",
         "sebastian/code-unit-reverse-lookup": "1.0.1",
         "sebastian/comparator": "3.0.2",
         "sebastian/diff": "3.0.2",
@@ -51,11 +51,11 @@
         "seld/jsonlint": "1.8.0",
         "seld/phar-utils": "1.1.0",
         "squizlabs/php_codesniffer": "3.5.5",
-        "symfony/browser-kit": "v4.4.9",
-        "symfony/css-selector": "v4.4.9",
-        "symfony/dom-crawler": "v4.4.9",
-        "symfony/lock": "v4.4.9",
-        "symfony/phpunit-bridge": "v4.4.9",
+        "symfony/browser-kit": "v4.4.10",
+        "symfony/css-selector": "v4.4.10",
+        "symfony/dom-crawler": "v4.4.10",
+        "symfony/lock": "v4.4.10",
+        "symfony/phpunit-bridge": "v4.4.10",
         "theseer/tokenizer": "1.1.3"
     }
 }

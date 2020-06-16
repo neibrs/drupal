@@ -442,7 +442,7 @@ system.prepare_modules_entity_uninstall:
   path: '/admin/modules/uninstall/entity/{entity_type_id}'
   defaults:
     _form: '\Drupal\system\Form\PrepareModulesEntityUninstallForm'
-    _title: 'Confirm content uninstall'
+    _title_callback: '\Drupal\system\Form\PrepareModulesEntityUninstallForm::formTitle'
   requirements:
     _permission: 'administer modules'
 
