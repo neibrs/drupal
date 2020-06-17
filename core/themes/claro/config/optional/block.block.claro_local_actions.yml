@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_style_plugins
+  theme:
+    - claro
+third_party_settings:
+  block_style_plugins:
+    simple_class:
+      simple_class: pull-right
+id: claro_local_actions
+theme: claro
+region: header
+weight: -2
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }
