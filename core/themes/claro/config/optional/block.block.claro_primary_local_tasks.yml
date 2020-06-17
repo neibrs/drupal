@@ -5,8 +5,8 @@ dependencies:
     - claro
 id: claro_primary_local_tasks
 theme: claro
-region: pre_content
-weight: -3
+region: header
+weight: 0
 provider: null
 plugin: local_tasks_block
 settings:

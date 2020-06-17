@@ -160,7 +160,6 @@ class ClaroPreRender implements TrustedCallbackInterface {
     // Add clearfix for filter wrapper.
     $element['format']['#attributes']['class'][] = 'clearfix';
     // Hide format select label visually.
-    $element['format']['format']['#title_display'] = 'invisible';
     $element['format']['format']['#wrapper_attributes']['class'][] = 'form-item--editor-format';
     $element['format']['format']['#attributes']['class'][] = 'form-element--extrasmall';
     $element['format']['format']['#attributes']['class'][] = 'form-element--editor-format';
@@ -178,6 +177,22 @@ class ClaroPreRender implements TrustedCallbackInterface {
   }
 
   /**
+   * Prerender callback for status_messages placeholder.
+   *
+   * @param array $element
+   *   A renderable array.
+   *
+   * @return array
+   *   The updated renderable array containing the placeholder.
+   */
+  public static function messagePlaceholder(array $element) {
+    if (isset($element['fallback']['#markup'])) {
+      $element['fallback']['#markup'] = '<div data-drupal-messages-fallback class="hidden messages-list"></div>';
+    }
+    return $element;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public static function trustedCallbacks() {
@@ -187,6 +202,7 @@ class ClaroPreRender implements TrustedCallbackInterface {
       'dropButton',
       'container',
       'textFormat',
+      'messagePlaceholder',
     ];
   }
 

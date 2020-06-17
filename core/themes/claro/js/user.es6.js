@@ -19,8 +19,8 @@
   Drupal.behaviors.password = {
     attach(context, settings) {
       const $passwordInput = $(context)
-        .find("input.js-password-field")
-        .once("password");
+        .find('input.js-password-field')
+        .once('password');
 
       if ($passwordInput.length) {
         // Settings and translated messages added by
@@ -32,35 +32,35 @@
 
         // The password_confirm form element object.
         const $passwordWidget = $passwordInput.closest(
-          ".js-form-type-password-confirm"
+          '.js-form-type-password-confirm',
         );
 
         // The password confirm input.
         const $passwordConfirmInput = $passwordWidget.find(
-          "input.js-password-confirm"
+          'input.js-password-confirm',
         );
 
         // The strength feedback element for the password input.
         const $passwordInputHelp = $(
-          Drupal.theme.passwordInputHelp(translate.strengthTitle)
+          Drupal.theme.passwordInputHelp(translate.strengthTitle),
         );
 
         // The password match feedback for the password confirm input.
         const $passwordConfirmHelp = $(
-          Drupal.theme.passwordConfirmHelp(translate.confirmTitle)
+          Drupal.theme.passwordConfirmHelp(translate.confirmTitle),
         );
 
         const $passwordInputStrengthBar = $passwordInputHelp.find(
-          ".js-password-strength-bar"
+          '.js-password-strength-bar',
         );
         const $passwordInputStrengthMessageWrapper = $passwordInputHelp.find(
-          ".js-password-strength-text"
+          '.js-password-strength-text',
         );
         const $passwordConfirmMatch = $passwordConfirmHelp.find(
-          ".js-password-match-text"
+          '.js-password-match-text',
         );
         let $passwordSuggestionsTips = $(
-          Drupal.theme.passwordSuggestionsTips("", "")
+          Drupal.theme.passwordSuggestionsTips('', ''),
         ).hide();
 
         // If the password strength indicator is enabled, add its markup.
@@ -77,7 +77,7 @@
         const passwordCheckMatch = confirmInputVal => {
           if (confirmInputVal) {
             const success = $passwordInput.val() === confirmInputVal;
-            const confirmClass = success ? "ok" : "error";
+            const confirmClass = success ? 'ok' : 'error';
             const confirmMatchMessage = success
               ? translate.confirmSuccess
               : translate.confirmFailure;
@@ -90,7 +90,7 @@
             ) {
               $passwordConfirmMatch
                 .html(confirmMatchMessage)
-                .removeClass("ok error")
+                .removeClass('ok error')
                 .addClass(confirmClass);
             }
           }
@@ -102,13 +102,13 @@
             // Evaluate the password strength.
             const result = Drupal.evaluatePasswordStrength(
               $passwordInput.val(),
-              settings.password
+              settings.password,
             );
             const $newSuggestions = $(
               Drupal.theme.passwordSuggestionsTips(
                 translate.hasWeaknesses,
-                result.tips
-              )
+                result.tips,
+              ),
             );
 
             // Update the suggestions for how to improve the password.
@@ -123,60 +123,60 @@
 
             // Adjust the length of the strength indicator.
             $passwordInputStrengthBar
-              .css("width", `${result.strength}%`)
-              .removeClass("is-weak is-fair is-good is-strong")
+              .css('width', `${result.strength}%`)
+              .removeClass('is-weak is-fair is-good is-strong')
               .addClass(result.indicatorClass);
 
             // Update the strength indication text if needed.
             if (
               !$passwordInputStrengthMessageWrapper.hasClass(
-                result.indicatorClass
+                result.indicatorClass,
               ) ||
               !$passwordInputStrengthMessageWrapper.html() ===
                 result.indicatorText
             ) {
               $passwordInputStrengthMessageWrapper
                 .html(result.indicatorText)
-                .removeClass("is-weak is-fair is-good is-strong")
+                .removeClass('is-weak is-fair is-good is-strong')
                 .addClass(result.indicatorClass);
             }
           }
 
           $passwordWidget
-            .removeClass("is-initial")
-            .removeClass("is-password-empty is-password-filled")
-            .removeClass("is-confirm-empty is-confirm-filled");
+            .removeClass('is-initial')
+            .removeClass('is-password-empty is-password-filled')
+            .removeClass('is-confirm-empty is-confirm-filled');
 
           // Check the value of the password input and add the proper classes.
           $passwordWidget.addClass(
-            $passwordInput.val() ? "is-password-filled" : "is-password-empty"
+            $passwordInput.val() ? 'is-password-filled' : 'is-password-empty',
           );
 
           // Check the value in the confirm input and show results.
           passwordCheckMatch($passwordConfirmInput.val());
           $passwordWidget.addClass(
             $passwordConfirmInput.val()
-              ? "is-confirm-filled"
-              : "is-confirm-empty"
+              ? 'is-confirm-filled'
+              : 'is-confirm-empty',
           );
         };
 
         // Add initial classes.
         $passwordWidget
           .addClass(
-            $passwordInput.val() ? "is-password-filled" : "is-password-empty"
+            $passwordInput.val() ? 'is-password-filled' : 'is-password-empty',
           )
           .addClass(
             $passwordConfirmInput.val()
-              ? "is-confirm-filled"
-              : "is-confirm-empty"
+              ? 'is-confirm-filled'
+              : 'is-confirm-empty',
           );
 
         // Monitor input events.
-        $passwordInput.on("input", passwordCheck);
-        $passwordConfirmInput.on("input", passwordCheck);
+        $passwordInput.on('input', passwordCheck);
+        $passwordConfirmInput.on('input', passwordCheck);
       }
-    }
+    },
   };
 
   /**
@@ -209,7 +209,7 @@
 
     // If there is a username edit box on the page, compare password to that,
     // otherwise use value from the database.
-    const $usernameBox = $("input.username");
+    const $usernameBox = $('input.username');
     const username =
       $usernameBox.length > 0 ? $usernameBox.val() : translate.username;
 
@@ -261,7 +261,7 @@
     }
 
     // Check if password is the same as the username.
-    if (password !== "" && password.toLowerCase() === username.toLowerCase()) {
+    if (password !== '' && password.toLowerCase() === username.toLowerCase()) {
       tips.push(translate.sameAsUsername);
       // Passwords the same as username are always very weak.
       strength = 5;
@@ -271,28 +271,28 @@
     // password strength meter.
     if (strength < 60) {
       indicatorText = translate.weak;
-      indicatorClass = "is-weak";
+      indicatorClass = 'is-weak';
     } else if (strength < 70) {
       indicatorText = translate.fair;
-      indicatorClass = "is-fair";
+      indicatorClass = 'is-fair';
     } else if (strength < 80) {
       indicatorText = translate.good;
-      indicatorClass = "is-good";
+      indicatorClass = 'is-good';
     } else if (strength <= 100) {
       indicatorText = translate.strong;
-      indicatorClass = "is-strong";
+      indicatorClass = 'is-strong';
     }
 
     return {
       strength,
       tips,
       indicatorText,
-      indicatorClass
+      indicatorClass,
     };
   };
 
   /**
-   * Password strenght feedback for password confirm's main input.
+   * Password strength feedback for password confirm's main input.
    *
    * @param {string} message
    *   The prefix text for the strength feedback word.
@@ -337,8 +337,8 @@
     `<div class="password-suggestions">${
       tips.length
         ? `${title}<ul class="password-suggestions__tips"><li class="password-suggestions__tip">${tips.join(
-            '</li><li class="password-suggestions__tip">'
+            '</li><li class="password-suggestions__tip">',
           )}</li></ul>`
-        : ""
+        : ''
     }</div>`;
 })(jQuery, Drupal);

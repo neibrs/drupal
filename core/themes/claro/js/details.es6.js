@@ -16,13 +16,13 @@
   Drupal.behaviors.claroDetails = {
     attach(context) {
       $(context)
-        .once("claroDetails")
-        .on("click", event => {
-          if (event.target.nodeName === "SUMMARY") {
-            $(event.target).trigger("focus");
+        .once('claroDetails')
+        .on('click', event => {
+          if (event.target.nodeName === 'SUMMARY') {
+            $(event.target).trigger('focus');
           }
         });
-    }
+    },
   };
 
   /**
@@ -42,17 +42,17 @@
       }
 
       $(context)
-        .find("details .details-title")
-        .once("claroDetailsToggleShim")
-        .on("keypress", event => {
+        .find('details .details-title')
+        .once('claroDetailsToggleShim')
+        .on('keypress', event => {
           const keyCode = event.keyCode || event.charCode;
           if (keyCode === 32) {
             $(event.target)
-              .closest("summary")
-              .trigger("click");
+              .closest('summary')
+              .trigger('click');
             event.preventDefault();
           }
         });
-    }
+    },
   };
 })(jQuery, Modernizr, Drupal);

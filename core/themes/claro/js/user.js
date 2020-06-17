@@ -8,40 +8,33 @@
 (function ($, Drupal) {
   Drupal.behaviors.password = {
     attach: function attach(context, settings) {
-      var $passwordInput = $(context).find("input.js-password-field").once("password");
+      var $passwordInput = $(context).find('input.js-password-field').once('password');
 
       if ($passwordInput.length) {
         var translate = settings.password;
-
         var $passwordInputParent = $passwordInput.parent();
-
-        var $passwordWidget = $passwordInput.closest(".js-form-type-password-confirm");
-
-        var $passwordConfirmInput = $passwordWidget.find("input.js-password-confirm");
-
+        var $passwordWidget = $passwordInput.closest('.js-form-type-password-confirm');
+        var $passwordConfirmInput = $passwordWidget.find('input.js-password-confirm');
         var $passwordInputHelp = $(Drupal.theme.passwordInputHelp(translate.strengthTitle));
-
         var $passwordConfirmHelp = $(Drupal.theme.passwordConfirmHelp(translate.confirmTitle));
-
-        var $passwordInputStrengthBar = $passwordInputHelp.find(".js-password-strength-bar");
-        var $passwordInputStrengthMessageWrapper = $passwordInputHelp.find(".js-password-strength-text");
-        var $passwordConfirmMatch = $passwordConfirmHelp.find(".js-password-match-text");
-        var $passwordSuggestionsTips = $(Drupal.theme.passwordSuggestionsTips("", "")).hide();
+        var $passwordInputStrengthBar = $passwordInputHelp.find('.js-password-strength-bar');
+        var $passwordInputStrengthMessageWrapper = $passwordInputHelp.find('.js-password-strength-text');
+        var $passwordConfirmMatch = $passwordConfirmHelp.find('.js-password-match-text');
+        var $passwordSuggestionsTips = $(Drupal.theme.passwordSuggestionsTips('', '')).hide();
 
         if (settings.password.showStrengthIndicator) {
           $passwordConfirmInput.after($passwordConfirmHelp).parent().after($passwordSuggestionsTips);
-
           $passwordInputParent.append($passwordInputHelp);
         }
 
         var passwordCheckMatch = function passwordCheckMatch(confirmInputVal) {
           if (confirmInputVal) {
             var success = $passwordInput.val() === confirmInputVal;
-            var confirmClass = success ? "ok" : "error";
+            var confirmClass = success ? 'ok' : 'error';
             var confirmMatchMessage = success ? translate.confirmSuccess : translate.confirmFailure;
 
             if (!$passwordConfirmMatch.hasClass(confirmClass) || !$passwordConfirmMatch.html() === confirmMatchMessage) {
-              $passwordConfirmMatch.html(confirmMatchMessage).removeClass("ok error").addClass(confirmClass);
+              $passwordConfirmMatch.html(confirmMatchMessage).removeClass('ok error').addClass(confirmClass);
             }
           }
         };
@@ -54,37 +47,33 @@
             if ($newSuggestions.html() !== $passwordSuggestionsTips.html()) {
               $passwordSuggestionsTips.replaceWith($newSuggestions);
               $passwordSuggestionsTips = $newSuggestions;
-
               $passwordSuggestionsTips.toggle(result.strength !== 100);
             }
 
-            $passwordInputStrengthBar.css("width", result.strength + "%").removeClass("is-weak is-fair is-good is-strong").addClass(result.indicatorClass);
+            $passwordInputStrengthBar.css('width', "".concat(result.strength, "%")).removeClass('is-weak is-fair is-good is-strong').addClass(result.indicatorClass);
 
             if (!$passwordInputStrengthMessageWrapper.hasClass(result.indicatorClass) || !$passwordInputStrengthMessageWrapper.html() === result.indicatorText) {
-              $passwordInputStrengthMessageWrapper.html(result.indicatorText).removeClass("is-weak is-fair is-good is-strong").addClass(result.indicatorClass);
+              $passwordInputStrengthMessageWrapper.html(result.indicatorText).removeClass('is-weak is-fair is-good is-strong').addClass(result.indicatorClass);
             }
           }
 
-          $passwordWidget.removeClass("is-initial").removeClass("is-password-empty is-password-filled").removeClass("is-confirm-empty is-confirm-filled");
-
-          $passwordWidget.addClass($passwordInput.val() ? "is-password-filled" : "is-password-empty");
-
+          $passwordWidget.removeClass('is-initial').removeClass('is-password-empty is-password-filled').removeClass('is-confirm-empty is-confirm-filled');
+          $passwordWidget.addClass($passwordInput.val() ? 'is-password-filled' : 'is-password-empty');
           passwordCheckMatch($passwordConfirmInput.val());
-          $passwordWidget.addClass($passwordConfirmInput.val() ? "is-confirm-filled" : "is-confirm-empty");
+          $passwordWidget.addClass($passwordConfirmInput.val() ? 'is-confirm-filled' : 'is-confirm-empty');
         };
 
-        $passwordWidget.addClass($passwordInput.val() ? "is-password-filled" : "is-password-empty").addClass($passwordConfirmInput.val() ? "is-confirm-filled" : "is-confirm-empty");
-
-        $passwordInput.on("input", passwordCheck);
-        $passwordConfirmInput.on("input", passwordCheck);
+        $passwordWidget.addClass($passwordInput.val() ? 'is-password-filled' : 'is-password-empty').addClass($passwordConfirmInput.val() ? 'is-confirm-filled' : 'is-confirm-empty');
+        $passwordInput.on('input', passwordCheck);
+        $passwordConfirmInput.on('input', passwordCheck);
       }
     }
   };
 
   Drupal.evaluatePasswordStrength = function (password, translate) {
     password = password.trim();
-    var indicatorText = void 0;
-    var indicatorClass = void 0;
+    var indicatorText;
+    var indicatorClass;
     var weaknesses = 0;
     var strength = 100;
     var tips = [];
@@ -92,8 +81,7 @@
     var hasUppercase = /[A-Z]/.test(password);
     var hasNumbers = /[0-9]/.test(password);
     var hasPunctuation = /[^a-zA-Z0-9]/.test(password);
-
-    var $usernameBox = $("input.username");
+    var $usernameBox = $('input.username');
     var username = $usernameBox.length > 0 ? $usernameBox.val() : translate.username;
 
     if (password.length < 12) {
@@ -105,14 +93,17 @@
       tips.push(translate.addLowerCase);
       weaknesses += 1;
     }
+
     if (!hasUppercase) {
       tips.push(translate.addUpperCase);
       weaknesses += 1;
     }
+
     if (!hasNumbers) {
       tips.push(translate.addNumbers);
       weaknesses += 1;
     }
+
     if (!hasPunctuation) {
       tips.push(translate.addPunctuation);
       weaknesses += 1;
@@ -139,24 +130,23 @@
         break;
     }
 
-    if (password !== "" && password.toLowerCase() === username.toLowerCase()) {
+    if (password !== '' && password.toLowerCase() === username.toLowerCase()) {
       tips.push(translate.sameAsUsername);
-
       strength = 5;
     }
 
     if (strength < 60) {
       indicatorText = translate.weak;
-      indicatorClass = "is-weak";
+      indicatorClass = 'is-weak';
     } else if (strength < 70) {
       indicatorText = translate.fair;
-      indicatorClass = "is-fair";
+      indicatorClass = 'is-fair';
     } else if (strength < 80) {
       indicatorText = translate.good;
-      indicatorClass = "is-good";
+      indicatorClass = 'is-good';
     } else if (strength <= 100) {
       indicatorText = translate.strong;
-      indicatorClass = "is-strong";
+      indicatorClass = 'is-strong';
     }
 
     return {
@@ -168,14 +158,14 @@
   };
 
   Drupal.theme.passwordInputHelp = function (message) {
-    return "<div class=\"password-strength\">\n      <div class=\"password-strength__track\">\n        <div class=\"password-strength__bar js-password-strength-bar\"></div>\n      </div>\n      <div aria-live=\"polite\" aria-atomic=\"true\" class=\"password-strength__title\">\n        " + message + " <span class=\"password-strength__text js-password-strength-text\"></span>\n      </div>\n    </div>";
+    return "<div class=\"password-strength\">\n      <div class=\"password-strength__track\">\n        <div class=\"password-strength__bar js-password-strength-bar\"></div>\n      </div>\n      <div aria-live=\"polite\" aria-atomic=\"true\" class=\"password-strength__title\">\n        ".concat(message, " <span class=\"password-strength__text js-password-strength-text\"></span>\n      </div>\n    </div>");
   };
 
   Drupal.theme.passwordConfirmHelp = function (message) {
-    return "<div aria-live=\"polite\" aria-atomic=\"true\" class=\"password-match-message\">" + message + " <span class=\"password-match-message__text js-password-match-text\"></span></div>";
+    return "<div aria-live=\"polite\" aria-atomic=\"true\" class=\"password-match-message\">".concat(message, " <span class=\"password-match-message__text js-password-match-text\"></span></div>");
   };
 
   Drupal.theme.passwordSuggestionsTips = function (title, tips) {
-    return "<div class=\"password-suggestions\">" + (tips.length ? title + "<ul class=\"password-suggestions__tips\"><li class=\"password-suggestions__tip\">" + tips.join('</li><li class="password-suggestions__tip">') + "</li></ul>" : "") + "</div>";
+    return "<div class=\"password-suggestions\">".concat(tips.length ? "".concat(title, "<ul class=\"password-suggestions__tips\"><li class=\"password-suggestions__tip\">").concat(tips.join('</li><li class="password-suggestions__tip">'), "</li></ul>") : '', "</div>");
   };
 })(jQuery, Drupal);

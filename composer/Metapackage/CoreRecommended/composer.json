@@ -58,7 +58,7 @@
         "gasparesganga/php-shapefile": "v3.3.0",
         "grasmash/expander": "1.0.0",
         "grasmash/yaml-expander": "1.4.0",
-        "guzzlehttp/guzzle": "6.5.4",
+        "guzzlehttp/guzzle": "6.5.5",
         "guzzlehttp/promises": "v1.3.1",
         "guzzlehttp/psr7": "1.6.1",
         "laminas/laminas-diactoros": "2.3.0",
@@ -120,7 +120,7 @@
         "twig/twig": "v2.12.5",
         "typo3/phar-stream-wrapper": "v3.1.4",
         "webflo/drupal-finder": "1.2.0",
-        "webmozart/assert": "1.8.0",
+        "webmozart/assert": "1.9.0",
         "webmozart/path-util": "2.3.0",
         "willdurand/geocoder": "4.2.2"
     }

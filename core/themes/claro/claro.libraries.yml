@@ -2,53 +2,67 @@ global-styling:
   version: VERSION
   css:
     base:
-      css/dist/base/elements.css: {}
-      css/dist/base/typography.css: {}
-      css/dist/base/print.css: {}
+      css/base/elements.css: {}
+      css/base/typography.css: {}
+      css/base/print.css: {}
     component:
-      css/dist/components/accordion.css: {}
-      css/dist/components/action-link.css: {}
-      css/dist/components/content-header.css: {}
-      css/dist/components/container-inline.css: {}
-      css/dist/components/container-inline.module.css: {}
-      css/dist/components/breadcrumb.css: {}
-      css/dist/components/button.css: {}
-      css/dist/components/details.css: {}
-      css/dist/components/divider.css: {}
-      css/dist/components/messages.css: {}
-      css/dist/components/entity-meta.css: {}
-      css/dist/components/fieldset.css: {}
-      css/dist/components/form.css: {}
-      css/dist/components/form--checkbox-radio.css: {}
-      css/dist/components/form--checkbox-radio--ie.css: {}
-      css/dist/components/form--field-multiple.css: {}
-      css/dist/components/form--managed-file.css: {}
-      css/dist/components/form--text.css: {}
-      css/dist/components/form--select.css: {}
-      css/dist/components/help.css: {}
-      css/dist/components/image-preview.css: {}
-      css/dist/components/menus-and-lists.css: {}
-      css/dist/components/modules-page.css: {}
-      css/dist/components/node.css: {}
-      css/dist/components/page-title.css: {}
-      css/dist/components/pager.css: {}
-      css/dist/components/skip-link.css: {}
-      css/dist/components/tables.css: {}
-      css/dist/components/table--file-multiple-widget.css: {}
-      css/dist/components/search-admin-settings.css: {}
-      css/dist/components/tablesort-indicator.css: {}
-      css/dist/components/system-status-report-general-info.css: {}
-      css/dist/components/system-status-report.css: {}
-      css/dist/components/system-status-report-counters.css: {}
-      css/dist/components/system-status-counter.css: {}
-      css/dist/components/tabs.css: {}
-      css/dist/components/views-ui.css: {}
+      css/classy/components/container-inline.css: {}
+      css/classy/components/exposed-filters.css: {}
+      css/classy/components/field.css: {}
+      css/classy/components/icons.css: {}
+      css/classy/components/inline-form.css: {}
+      css/classy/components/item-list.css: {}
+      css/classy/components/link.css: {}
+      css/classy/components/links.css: {}
+      css/classy/components/menu.css: {}
+      css/classy/components/more-link.css: {}
+      css/classy/components/tablesort.css: {}
+      css/classy/components/textarea.css: {}
+      css/classy/components/ui-dialog.css: {}
+      css/components/accordion.css: {}
+      css/components/action-link.css: {}
+      css/components/content-header.css: {}
+      css/components/container-inline.css: {}
+      css/components/container-inline.module.css: {}
+      css/components/breadcrumb.css: {}
+      css/components/button.css: {}
+      css/components/details.css: {}
+      css/components/divider.css: {}
+      css/components/messages.css: {}
+      css/components/entity-meta.css: {}
+      css/components/fieldset.css: {}
+      css/components/form.css: {}
+      css/components/form--checkbox-radio.css: {}
+      css/components/form--checkbox-radio--ie.css: {}
+      css/components/form--field-multiple.css: {}
+      css/components/form--managed-file.css: {}
+      css/components/form--text.css: {}
+      css/components/form--select.css: {}
+      css/components/help.css: {}
+      css/components/image-preview.css: {}
+      css/components/menus-and-lists.css: {}
+      css/components/modules-page.css: {}
+      css/components/node.css: {}
+      css/components/page-title.css: {}
+      css/components/pager.css: {}
+      css/components/skip-link.css: {}
+      css/components/tables.css: {}
+      css/components/table--file-multiple-widget.css: {}
+      css/components/search-admin-settings.css: {}
+      css/components/tablesort-indicator.css: {}
+      css/components/system-status-report-general-info.css: {}
+      css/components/system-status-report.css: {}
+      css/components/system-status-report-counters.css: {}
+      css/components/system-status-counter.css: {}
+      css/components/tableselect.css: {}
+      css/components/tabs.css: {}
+      css/components/views-ui.css: {}
     theme:
-      css/dist/theme/colors.css: {}
+      css/theme/colors.css: {}
     layout:
-      css/dist/layout/breadcrumb.css: {}
-      css/dist/layout/local-actions.css: {}
-      css/dist/layout/layout.css: {}
+      css/layout/breadcrumb.css: {}
+      css/layout/local-actions.css: {}
+      css/layout/layout.css: {}
   dependencies:
     - system/admin
     - core/jquery
@@ -57,7 +71,7 @@ global-styling:
     # such as inputs, action links, buttons, dropbuttons. For usability and
     # accessibility reasons, we keep target sizes big enough on touch screen
     # devices (by not making these elements smaller than their default size).
-    # Modernizr is used for recognising whether user is using a touch device or
+    # Modernizr is used for recognizing whether user is using a touch device or
     # not. This allows conditionally rendering small variation of the control
     # elements on non-touch devices. In some cases, such as when rendering
     # links, it is hard recognize when Modernizr should be attached, therefore
@@ -68,7 +82,7 @@ node-form:
   version: VERSION
   css:
     layout:
-      css/dist/layout/node-add.css: {}
+      css/layout/node-add.css: {}
   dependencies:
     - node/form
 
@@ -78,7 +92,7 @@ maintenance-page:
     js/mobile.install.js: {}
   css:
     theme:
-      css/dist/theme/maintenance-page.css: {}
+      css/theme/maintenance-page.css: {}
   dependencies:
     - system/maintenance
     - claro/global-styling
@@ -89,7 +103,7 @@ install-page:
     js/mobile.install.js: {}
   css:
     theme:
-      css/dist/theme/install-page.css: {}
+      css/theme/install-page.css: {}
   dependencies:
     - claro/maintenance-page
 
@@ -98,7 +112,6 @@ drupal.nav-tabs:
   js:
     js/nav-tabs.js: {}
   dependencies:
-    - core/matchmedia
     - core/jquery
     - core/drupal
     - core/jquery.once
@@ -110,8 +123,6 @@ drupal.responsive-detail:
   js:
     js/responsive-details.js: {}
   dependencies:
-    - core/matchmedia
-    - core/matchmedia.addListener
     - core/jquery
     - core/jquery.once
     - core/collapse
@@ -120,57 +131,51 @@ claro.jquery.ui:
   version: VERSION
   css:
     component:
-      css/dist/components/jquery.ui/theme.css: { weight: -1 }
+      css/components/jquery.ui/theme.css: { weight: -1 }
 
 claro.drupal.dialog:
   version: VERSION
   css:
     theme:
-      css/dist/components/dialog.css: {}
+      css/components/dialog.css: {}
 
 ckeditor-dialog:
   version: VERSION
   css:
     theme:
-      css/dist/theme/ckeditor-dialog.css: {}
+      css/theme/ckeditor-dialog.css: {}
 
 ckeditor-editor:
   version: VERSION
   css:
     theme:
-      css/dist/theme/ckeditor-editor.css: {}
+      css/theme/ckeditor-editor.css: {}
 
 tour-styling:
   version: VERSION
   css:
     theme:
-      css/dist/components/tour.theme.css: {}
+      css/components/tour.theme.css: {}
 
 media-form:
   version: VERSION
   css:
     layout:
-      css/dist/components/media.css: {}
+      css/components/media.css: {}
   dependencies:
     - media/form
-
-image-widget:
-  version: VERSION
-  css:
-    component:
-      css/dist/layout/image-widget.css: {}
 
 system.admin:
   version: VERSION
   css:
     component:
-      css/dist/components/system-admin--admin-list.css: { weight: -10 }
-      css/dist/components/system-admin--links.css: { weight: -10 }
-      css/dist/components/system-admin--modules.css: { weight: -10 }
-      css/dist/components/system-admin--panel.css: { weight: -10 }
-      css/dist/components/system-admin--status-report.css: { weight: -10 }
+      css/components/system-admin--admin-list.css: { weight: -10 }
+      css/components/system-admin--links.css: { weight: -10 }
+      css/components/system-admin--modules.css: { weight: -10 }
+      css/components/system-admin--panel.css: { weight: -10 }
+      css/components/system-admin--status-report.css: { weight: -10 }
     layout:
-      css/dist/layout/system-admin--layout.css: { weight: -10 }
+      css/layout/system-admin--layout.css: { weight: -10 }
   dependencies:
     - claro/card
 
@@ -199,7 +204,7 @@ drupal.shortcut:
     # @todo move this to components after
     #   https://www.drupal.org/project/drupal/issues/3045467 is in.
     theme:
-      css/dist/components/shortcut.css: {}
+      css/components/shortcut.css: {}
 
 details-focus:
   js:
@@ -212,7 +217,7 @@ ajax:
 form.password-confirm:
   css:
     component:
-      css/dist/components/form--password-confirm.css: {}
+      css/components/form--password-confirm.css: {}
   js:
     js/user.js: {}
   dependencies:
@@ -224,7 +229,7 @@ form.password-confirm:
 views:
   css:
     component:
-      css/dist/components/views-exposed-form.css: {}
+      css/components/views-exposed-form.css: {}
 
 messages:
   js:
@@ -233,24 +238,90 @@ messages:
 card:
   css:
     component:
-      css/dist/layout/card-list.css: {}
-      css/dist/components/card.css: {}
+      css/layout/card-list.css: {}
+      css/components/card.css: {}
 
 vertical-tabs:
   css:
     component:
-      css/dist/components/vertical-tabs.css: {}
+      css/components/vertical-tabs.css: {}
   dependencies:
     - claro/global-styling
 
 file:
   css:
     component:
-      css/dist/components/file.css: {}
+      css/components/file.css: {}
 
-fontawesome:
+media_library.theme:
+  version: VERSION
   css:
     theme:
-      node_modules/@fontawesome/fontawesome-free/css/all.css: {}
+      css/theme/media-library.css: {}
+
+media_library.ui:
+  version: VERSION
+  css:
+    component:
+      css/components/media-library.ui.css : {}
   js:
-    node_modules/@fontawesome/fontawesome-free/js/all.js: {}
+    js/media-library.ui.js: { weight: -1 }
+
+progress:
+  version: VERSION
+  css:
+    component:
+      css/components/progress.css: {}
+
+filter:
+  version: VERSION
+  css:
+    component:
+      css/theme/filter.theme.css: {}
+
+classy.book-navigation:
+  version: VERSION
+  css:
+    component:
+      css/classy/components/book-navigation.css: {}
+
+classy.file:
+  version: VERSION
+  css:
+    component:
+      css/classy/components/file.css: { weight: -10 }
+
+classy.forum:
+  version: VERSION
+  css:
+    component:
+      css/classy/components/forum.css: { weight: -10 }
+
+classy.indented:
+  version: VERSION
+  css:
+    component:
+      css/classy/components/indented.css: {}
+
+classy.media_embed_error:
+  version: VERSION
+  css:
+    component:
+      css/classy/components/media-embed-error.css: {}
+
+classy.media_embed_ckeditor_theme:
+  version: VERSION
+  js:
+    js/classy/media_embed_ckeditor.theme.js: {}
+
+classy.node:
+  version: VERSION
+  css:
+    component:
+      css/classy/components/node.css: { weight: -10 }
+
+classy.search-results:
+  version: VERSION
+  css:
+    component:
+      css/classy/components/search-results.css: {}
