@@ -44,6 +44,7 @@
         "drupal/drush_language": "1.0.0-rc3",
         "drupal/entity": "1.0.0",
         "drupal/entity_reference_revisions": "1.8.0",
+        "drupal/features": "3.11.0",
         "drupal/field_group": "3.1.0",
         "drupal/geocoder": "3.7.0",
         "drupal/geofield": "1.15.0",

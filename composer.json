@@ -29,7 +29,8 @@
         "drupal/geolocation": "^3.2",
         "drupal/geofield": "^1.15",
         "drupal/geocoder": "^3.7",
-        "drupal/field_group": "^3.1"
+        "drupal/field_group": "^3.1",
+        "drupal/features": "^3.11"
     },
     "require-dev": {
         "behat/mink": "^1.8",

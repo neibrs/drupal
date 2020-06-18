@@ -243,6 +243,9 @@ class ConfigNamesMapper extends PluginBase implements ConfigMapperInterface, Con
    * {@inheritdoc}
    */
   public function getOverviewRoute() {
+    if (empty($this->getBaseRoute())) {
+      $x = 'a';
+    }
     $route = new Route(
       $this->getBaseRoute()->getPath() . '/translate',
       [
