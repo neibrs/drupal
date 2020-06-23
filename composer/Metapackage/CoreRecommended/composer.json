@@ -42,6 +42,7 @@
         "drupal/core-vendor-hardening": "9.1.x-dev",
         "drupal/drupal-library-installer-plugin": "0.3",
         "drupal/drush_language": "1.0.0-rc3",
+        "drupal/easy_breadcrumb": "dev-1.x",
         "drupal/entity": "1.0.0",
         "drupal/entity_reference_revisions": "1.8.0",
         "drupal/features": "3.11.0",

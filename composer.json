@@ -30,7 +30,8 @@
         "drupal/geofield": "^1.15",
         "drupal/geocoder": "^3.7",
         "drupal/field_group": "^3.1",
-        "drupal/features": "^3.11"
+        "drupal/features": "^3.11",
+        "drupal/easy_breadcrumb": "^1.12"
     },
     "require-dev": {
         "behat/mink": "^1.8",
