@@ -31,7 +31,10 @@
         "drupal/geocoder": "^3.7",
         "drupal/field_group": "^3.1",
         "drupal/features": "^3.11",
-        "drupal/easy_breadcrumb": "^1.12"
+        "drupal/easy_breadcrumb": "^1.12",
+        "drupal/superfish": "^1.4",
+        "drupal/config_update": "^1.7",
+        "drupal/config_inspector": "^1.1"
     },
     "require-dev": {
         "behat/mink": "^1.8",
