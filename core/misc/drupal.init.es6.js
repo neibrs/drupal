@@ -16,13 +16,13 @@ document.documentElement.className += ' js';
    *   The function to be called on document ready.
    */
   const domReady = callback => {
-    if (document.readyState !== 'loading') {
+    const listener = () => {
       callback();
+      document.removeEventListener('DOMContentLoaded', listener);
+    };
+    if (document.readyState !== 'loading') {
+      setTimeout(callback, 0);
     } else {
-      const listener = () => {
-        callback();
-        document.removeEventListener('DOMContentLoaded', listener);
-      };
       document.addEventListener('DOMContentLoaded', listener);
     }
   };

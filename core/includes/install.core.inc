@@ -32,7 +32,7 @@ use Drupal\Core\Extension\ExtensionDiscovery;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Url;
 use Drupal\language\Entity\ConfigurableLanguage;
-use Symfony\Cmf\Component\Routing\RouteObjectInterface;
+use Drupal\Core\Routing\RouteObjectInterface;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -1020,7 +1020,7 @@ function install_display_output($output, $install_state) {
   // Prevent install.php from being indexed when installed in a sub folder.
   // robots.txt rules are not read if the site is within domain.com/subfolder
   // resulting in /subfolder/install.php being found through search engines.
-  // When settings.php is writeable this can be used via an external database
+  // When settings.php is writable this can be used via an external database
   // leading a malicious user to gain php access to the server.
   $noindex_meta_tag = [
     '#tag' => 'meta',

@@ -13,7 +13,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
- * Minimum allowed version of PHP.
+ * Minimum allowed version of PHP for Drupal to be bootstrapped.
  *
  * Below this version:
  * - The installer cannot be run.
@@ -22,12 +22,13 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
  * - If a site managed to bypass all of the above, then an error is shown in
  *   the status report and various fatal errors occur on various pages.
  *
- * @see install.php
+ * @deprecated in drupal:9.1.0 and is removed from drupal:10.0.0. Use
+ *   \Drupal::MINIMUM_PHP instead.
  *
- * @todo Move this to an appropriate autoloadable class. See
- *   https://www.drupal.org/project/drupal/issues/2908079
+ * @see https://www.drupal.org/node/2909361
+ * @see install.php
  */
-const DRUPAL_MINIMUM_PHP = '7.3.0';
+const DRUPAL_MINIMUM_PHP = \Drupal::MINIMUM_PHP;
 
 /**
  * Minimum supported version of PHP.
@@ -38,10 +39,12 @@ const DRUPAL_MINIMUM_PHP = '7.3.0';
  *   that Drupal no longer supports that PHP version.
  * - An error is shown in the status report that the PHP version is too old.
  *
- * @todo Move this to an appropriate autoloadable class. See
- *   https://www.drupal.org/project/drupal/issues/2908079
+ * @deprecated in drupal:9.1.0 and is removed from drupal:10.0.0. Use
+ *   \Drupal::MINIMUM_SUPPORTED_PHP instead.
+ *
+ * @see https://www.drupal.org/node/2909361
  */
-const DRUPAL_MINIMUM_SUPPORTED_PHP = '7.3.0';
+const DRUPAL_MINIMUM_SUPPORTED_PHP = \Drupal::MINIMUM_SUPPORTED_PHP;
 
 /**
  * Minimum recommended version of PHP.
@@ -50,10 +53,12 @@ const DRUPAL_MINIMUM_SUPPORTED_PHP = '7.3.0';
  * message, but Drupal can still be installed. Used for (e.g.) PHP versions
  * that have reached their EOL or will in the near future.
  *
- * @todo Move this to an appropriate autoloadable class. See
- *   https://www.drupal.org/project/drupal/issues/2908079
+ * @deprecated in drupal:9.1.0 and is removed from drupal:10.0.0. Use
+ *   \Drupal::RECOMMENDED_PHP instead.
+ *
+ * @see https://www.drupal.org/node/2909361
  */
-const DRUPAL_RECOMMENDED_PHP = '7.3';
+const DRUPAL_RECOMMENDED_PHP = \Drupal::RECOMMENDED_PHP;
 
 /**
  * Minimum recommended value of PHP memory_limit.
@@ -62,10 +67,12 @@ const DRUPAL_RECOMMENDED_PHP = '7.3';
  * contributed modules to be installed prior to hitting the limit. However,
  * 40M is the target for the Standard installation profile.
  *
- * @todo Move this to an appropriate autoloadable class. See
- *   https://www.drupal.org/project/drupal/issues/2908079
+ * @deprecated in drupal:9.1.0 and is removed from drupal:10.0.0. Use
+ *   \Drupal::MINIMUM_PHP_MEMORY_LIMIT instead.
+ *
+ * @see https://www.drupal.org/node/2909361
  */
-const DRUPAL_MINIMUM_PHP_MEMORY_LIMIT = '64M';
+const DRUPAL_MINIMUM_PHP_MEMORY_LIMIT = \Drupal::MINIMUM_PHP_MEMORY_LIMIT;
 
 /**
  * Error reporting level: display no errors.
@@ -382,11 +389,17 @@ function drupal_valid_test_ua($new_prefix = NULL) {
     // Ensure that no information leaks on production sites.
     $test_db = new TestDatabase($prefix);
     $key_file = DRUPAL_ROOT . '/' . $test_db->getTestSitePath() . '/.htkey';
-    if (!is_readable($key_file)) {
+    if (!is_readable($key_file) || is_dir($key_file)) {
       header($_SERVER['SERVER_PROTOCOL'] . ' 403 Forbidden');
       exit;
     }
     $private_key = file_get_contents($key_file);
+    // The string from drupal_generate_test_ua() is 74 bytes long. If we don't
+    // have it, tests cannot be allowed.
+    if (empty($private_key) || strlen($private_key) < 74) {
+      header($_SERVER['SERVER_PROTOCOL'] . ' 403 Forbidden');
+      exit;
+    }
     // The file properties add more entropy not easily accessible to others.
     $key = $private_key . filectime(__FILE__) . fileinode(__FILE__);
     $time_diff = REQUEST_TIME - $time;

@@ -35,7 +35,12 @@ class SearchNodePunctuationTest extends BrowserTestBase {
 
     node_access_rebuild();
     // Create a test user and log in.
-    $this->testUser = $this->drupalCreateUser(['access content', 'search content', 'use advanced search', 'access user profiles']);
+    $this->testUser = $this->drupalCreateUser([
+      'access content',
+      'search content',
+      'use advanced search',
+      'access user profiles',
+    ]);
     $this->drupalLogin($this->testUser);
   }
 
@@ -44,6 +49,7 @@ class SearchNodePunctuationTest extends BrowserTestBase {
    */
   public function testPhraseSearchPunctuation() {
     $node = $this->drupalCreateNode(['body' => [['value' => "The bunny's ears were fluffy."]]]);
+    // cSpell:disable-next-line
     $node2 = $this->drupalCreateNode(['body' => [['value' => 'Dignissim Aliquam &amp; Quieligo meus natu quae quia te. Damnum&copy; erat&mdash; neo pneum. Facilisi feugiat ibidem ratis.']]]);
 
     // Update the search index.

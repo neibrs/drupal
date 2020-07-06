@@ -55,8 +55,17 @@ class LocaleImportFunctionalTest extends BrowserTestBase {
     $file_system->copy(__DIR__ . '/../../../tests/test.de.po', 'translations://', FileSystemInterface::EXISTS_REPLACE);
     $file_system->copy(__DIR__ . '/../../../tests/test.xx.po', 'translations://', FileSystemInterface::EXISTS_REPLACE);
 
-    $this->adminUser = $this->drupalCreateUser(['administer languages', 'translate interface', 'access administration pages']);
-    $this->adminUserAccessSiteReports = $this->drupalCreateUser(['administer languages', 'translate interface', 'access administration pages', 'access site reports']);
+    $this->adminUser = $this->drupalCreateUser([
+      'administer languages',
+      'translate interface',
+      'access administration pages',
+    ]);
+    $this->adminUserAccessSiteReports = $this->drupalCreateUser([
+      'administer languages',
+      'translate interface',
+      'access administration pages',
+      'access site reports',
+    ]);
     $this->drupalLogin($this->adminUser);
 
     // Enable import of translations. By default this is disabled for automated
@@ -291,11 +300,13 @@ class LocaleImportFunctionalTest extends BrowserTestBase {
     $config_strings = [
       'system.maintenance' => [
         '@site is currently under maintenance. We should be back shortly. Thank you for your patience.',
+        // cSpell:disable-next-line
         '@site karbantartás alatt áll. Rövidesen visszatérünk. Köszönjük a türelmet.',
         'message',
       ],
       'user.role.anonymous' => [
         'Anonymous user',
+        // cSpell:disable-next-line
         'Névtelen felhasználó',
         'label',
       ],
