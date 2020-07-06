@@ -34,7 +34,14 @@
         "drupal/easy_breadcrumb": "^1.12",
         "drupal/superfish": "^1.4",
         "drupal/config_update": "^1.7",
-        "drupal/config_inspector": "^1.1"
+        "drupal/config_inspector": "^1.1",
+        "drupal/advancedqueue": "^1.0@RC",
+        "drupal/state_machine": "^1.0",
+        "drupal/commerce_recurring": "1.x-dev",
+        "drupal/devel": "^4.0",
+        "drupal/commerce_paypal": "1.x-dev",
+        "lokielse/omnipay-alipay": "^3.0.5",
+        "tecnickcom/tc-lib-barcode": "^1.15"
     },
     "require-dev": {
         "behat/mink": "^1.8",
